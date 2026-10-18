@@ -1,51 +1,74 @@
+/* 앱 디자인 토큰(app/Assets/_Project/Scripts/UI/Theme.cs, G1 광택 블랙)을 웹 단위(pt = px)로 옮김.
+   바탕 Cream · 흰 카드 · 잉크 #1A1A1A · 회색 묶음 제목 + 흰 카드 묶음(설정 화면과 같은 모양) · 카드 반경 M 20 · 안쪽 여백 PadM 20 · 알약 버튼 */
 :root {
-  --bg: #fbf8f3;
-  --surface: #ffffff;
-  --ink: #2b2522;
-  --ink-soft: #6f6560;
-  --line: #ebe4da;
-  --accent: #e8577e;
-  --chip: #fdecf1;
-  color-scheme: light dark;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1a1716;
-    --surface: #24201e;
-    --ink: #f3ece6;
-    --ink-soft: #b3a9a2;
-    --line: #3a3330;
-    --accent: #ff7fa0;
-    --chip: #3a2730;
-  }
+  --cream: #f3f3f1;      /* Theme.Cream: 화면·시트 바탕 */
+  --surface: #ffffff;    /* Theme.Surface: 카드 */
+  --beige: #e4e4e1;      /* Theme.Beige: 보조 버튼·칩 */
+  --ink: #1a1a1a;        /* Theme.Ink */
+  --ink-soft: #6e6e69;   /* Theme.InkSoft */
+  --line: #d8d8d4;       /* Theme.Line */
+  --primary: #1a1a1a;    /* Theme.Primary(G1) */
+  --on-primary: #ffffff;
+  --radius-s: 12px;      /* RadiusS */
+  --radius-m: 20px;      /* RadiusM */
+  --pad-m: 20px;         /* PadM */
+  --side: 20px;          /* ScreenSide */
+  color-scheme: light;
 }
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--bg);
+  background: var(--cream);
   color: var(--ink);
-  font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;   /* FontBody 15pt */
   word-break: keep-all;
+  overflow-wrap: anywhere;
 }
-main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
-header.brand { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-header.brand .logo { width: 36px; height: 36px; border-radius: 10px; background: var(--accent); }
-header.brand b { font-size: 18px; }
-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 28px; }
-nav a { padding: 6px 14px; border-radius: 999px; background: var(--chip); color: var(--ink); text-decoration: none; font-size: 14px; }
-nav a[aria-current="page"] { background: var(--accent); color: #fff; }
-h1 { font-size: 26px; line-height: 1.35; margin: 0 0 6px; }
-.meta { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; }
-section { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 20px; margin: 14px 0; }
-section h2 { font-size: 18px; margin: 0 0 8px; }
-section h3 { font-size: 16px; margin: 14px 0 4px; }
-ul, ol { padding-left: 20px; margin: 6px 0; }
-li { margin: 3px 0; }
-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0; display: block; overflow-x: auto; }
-th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; min-width: 90px; }
-th { background: var(--chip); }
-a { color: var(--accent); }
-.note { color: var(--ink-soft); font-size: 14px; }
-footer { color: var(--ink-soft); font-size: 13px; margin-top: 32px; text-align: center; }
+main { max-width: 720px; margin: 0 auto; padding: 24px var(--side) 48px; }
+
+/* 위쪽 줄: 앱 아이콘 + 이름 */
+header.brand { display: flex; align-items: center; gap: 12px; }
+header.brand .logo { width: 40px; height: 40px; border-radius: 10px; display: block; }
+header.brand b { font-size: 17px; font-weight: 700; }
+
+/* 페이지 칩: 고른 것 = 검정 알약, 나머지 = 베이지 알약(앱의 세그먼트·칩과 같은 결) */
+nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 24px; }
+nav a {
+  display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px;
+  border-radius: 999px; background: var(--beige); color: var(--ink);
+  font-size: 13px; font-weight: 600; text-decoration: none;
+}
+nav a[aria-current="page"] { background: var(--primary); color: var(--on-primary); }
+
+h1 { font-size: 22px; line-height: 1.35; font-weight: 800; margin: 0 0 4px; }   /* FontTitle 22pt */
+.meta { color: var(--ink-soft); font-size: 13px; margin: 0 0 8px; }
+
+/* 묶음: 회색 작은 제목 + 흰 카드(설정 화면의 Kit.Section) */
+h2.group { font-size: 13px; font-weight: 600; color: var(--ink-soft); margin: 24px 0 8px; padding: 0 4px; }
+section {
+  background: var(--surface);
+  border-radius: var(--radius-m);
+  padding: var(--pad-m);
+  margin: 0 0 12px;
+}
 section > :first-child { margin-top: 0; }
 section > :last-child { margin-bottom: 0; }
+section h3 { font-size: 15px; font-weight: 700; margin: 16px 0 4px; }
+p { margin: 8px 0; }
+ul, ol { padding-left: 20px; margin: 8px 0; }
+li { margin: 4px 0; }
+b { font-weight: 700; }
+
+/* 표: 얇은 선, 머리 줄은 바탕색 */
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; margin: 8px 0;
+  display: block; overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-s);
+}
+th, td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); min-width: 96px; }
+tr:last-child td { border-bottom: 0; }
+th { background: var(--cream); font-weight: 700; }
+
+a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.note { color: var(--ink-soft); font-size: 13px; }
+footer { color: var(--ink-soft); font-size: 12px; margin-top: 32px; text-align: center; }   /* FontCaption 12pt */
